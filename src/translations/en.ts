@@ -57,7 +57,7 @@ const en = {
 
   // ── Login ────────────────────────────────────────────────
   login: {
-    title: "DMS QA",
+    title: "IT Helpdesk",
     subtitle: "Enter your credentials to login",
     username: "Username",
     usernamePlaceholder: "Enter your username",

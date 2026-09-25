@@ -10,52 +10,37 @@ import { ReactNode } from "react";
 import Login from "@/pages/Login/Login";
 import MagicLink from "@/pages/Auth/MagicLink";
 import Dashboard from "@/pages/Dashboard/DashboardLayout";
-import Profile from "@/pages/Profile";
-import NotFound from "@/pages/NotFound";
-import Landing from "@/pages/Landing";
-
-import Departments from "@/pages/Departments";
-import DepartmentDetail from "@/pages/Departments/pages/detail";
-import CreateDepartment from "@/pages/Departments/pages/create";
-import UpdateDepartment from "@/pages/Departments/pages/update";
-
 import Users from "@/pages/Users";
 import CreateUser from "@/pages/Users/pages/create";
-import UserDetail from "@/pages/Users/pages/detail";
 import UpdateUser from "@/pages/Users/pages/update";
-
-import Documents from "@/pages/Documents";
-import CreateDocument from "@/pages/Documents/pages/Create";
-import MigrationDocuments from "@/pages/Documents/pages/MigrationDocuments";
-import DocumentDetail from "@/pages/Documents/pages/Detail";
-import UpdateDocument from "@/pages/Documents/pages/Update";
-import ReviseDocument from "@/pages/Documents/pages/Revise";
-import UnifiedApprovals from "@/pages/Approvals"; // New unified approval page
-import DocumentApprovalDetail from "@/pages/Approvals/DocumentApprovalDetail";
-import PrintApprovalDetail from "@/pages/Approvals/PrintApprovalDetail";
-import DeletionApprovalDetail from "@/pages/Approvals/DeletionApprovalDetail";
-import RevisionApprovalDetail from "@/pages/Approvals/RevisionApprovalDetail";
-import ReferenceApprovalDetail from "@/pages/Approvals/ReferenceApprovalDetail";
-import MasterIndex from "@/pages/Shared/pages/MasterIndex";
-import FormMasterIndex from "@/pages/Shared/pages/FormMasterIndex";
-import ExternalMasterIndex from "@/pages/Shared/pages/ExternalMasterIndex";
-import Shared from "@/pages/Shared";
-import DocumentShared from "@/pages/Shared/pages/DocumentsShared";
+import DetailUser from "@/pages/Users/pages/detail";
 
 import Roles from "@/pages/Roles";
 import CreateRole from "@/pages/Roles/pages/create";
-import RoleDetail from "@/pages/Roles/pages/detail";
 import UpdateRole from "@/pages/Roles/pages/update";
+import DetailRole from "@/pages/Roles/pages/detail";
 
-import References from "@/pages/References";
-import CreateReference from "@/pages/References/pages/Create";
-import UpdateReference from "@/pages/References/pages/Update";
-import ReferenceApproval from "@/pages/Documents/pages/ReferenceApproval";
-import DocumentVerification from "@/pages/Verify";
+import Departments from "@/pages/Departments";
+import CreateDepartment from "@/pages/Departments/pages/create";
+import UpdateDepartment from "@/pages/Departments/pages/update";
+import DetailDepartment from "@/pages/Departments/pages/detail";
+import TicketCategories from "@/pages/TicketCategories";
+import CreateTicketCategory from "@/pages/TicketCategories/create";
+import UpdateTicketCategory from "@/pages/TicketCategories/update";
+import Tickets from "@/pages/Tickets";
+import TicketDetail from "@/pages/Tickets/detail";
+import PortalHome from "@/pages/Portal/Home";
+import PortalTickets from "@/pages/Portal/MyTickets";
+import PortalCreateTicket from "@/pages/Portal/CreateTicket";
+import PortalTicketDetail from "@/pages/Portal/TicketDetail";
+import NotFound from "@/pages/NotFound";
+import Landing from "@/pages/Landing";
 
 import type { AuthUser } from "@/store/authUser/types";
 
 import LoadingOverlay from "@/components/common/LoadingOverlay";
+
+import RoleSelection from "@/pages/RoleSelection";
 
 // Redux state type
 interface RootState {
@@ -71,22 +56,37 @@ const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   return user ? <>{children}</> : <Navigate to="/" replace />;
 };
 
-const PublicRoute = ({ children }: { children: ReactNode }) => {
+const AdminRoute = ({ children }: { children: ReactNode }) => {
   const user = useSelector((state: RootState) => state.authUser.user);
-  return user ? <Navigate to="/dashboard" replace /> : <>{children}</>;
+  if (!user) return <Navigate to="/" replace />;
+  
+  const roleName = user.role?.name;
+  if (roleName !== "Admin" && roleName !== "Super Admin") {
+    return <Navigate to="/portal" replace />;
+  }
+  return <>{children}</>;
 };
 
-import ThemeHandler from "@/components/common/ThemeHandler";
-import Obsolete from "./pages/Obsolete";
-import ObsoleteDocumentDetail from "./pages/Obsolete/pages/Detail";
-import DocumentSharedDetail from "./pages/Shared/pages/Detail";
-import PrintHistory from "./pages/PrintHistory";
-import PrintHistoryDetail from "./pages/PrintHistory/pages/Detail";
+const PublicRoute = ({ children }: { children: ReactNode }) => {
+  const user = useSelector((state: RootState) => state.authUser.user);
+  
+  if (user) {
+    const roleName = user.role?.name;
+    if (roleName === "Super Admin") {
+      return <Navigate to="/role-selection" replace />;
+    } else if (roleName === "Admin") {
+      return <Navigate to="/dashboard" replace />;
+    } else {
+      return <Navigate to="/portal" replace />;
+    }
+  }
+  
+  return <>{children}</>;
+};
 
 function App() {
   return (
     <Router>
-      <ThemeHandler />
       <LoadingOverlay />
       <Routes>
         {/* Public Routes */}
@@ -102,10 +102,6 @@ function App() {
         {/* Magic Link Auto-Login - Public */}
         <Route path="/auth/magic/:token" element={<MagicLink />} />
 
-        {/* Document Verification Page - Public (for QR code scanning) */}
-        <Route path="/verify/:id" element={<DocumentVerification />} />
-
-        {/* Protected Routes */}
         {/* Landing Page */}
         <Route
           path="/"
@@ -116,353 +112,38 @@ function App() {
           }
         />
 
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
+        {/* Super Admin Role Selection */}
+        <Route path="/role-selection" element={<ProtectedRoute><RoleSelection /></ProtectedRoute>} />
 
-        <Route
-          path="/departments"
-          element={
-            <ProtectedRoute>
-              <Departments />
-            </ProtectedRoute>
-          }
-        />
+        {/* Admin Routes (CMS) */}
+        <Route path="/dashboard" element={<AdminRoute><Dashboard /></AdminRoute>} />
+        <Route path="/users" element={<AdminRoute><Users /></AdminRoute>} />
+        <Route path="/users/create" element={<AdminRoute><CreateUser /></AdminRoute>} />
+        <Route path="/users/update/:id" element={<AdminRoute><UpdateUser /></AdminRoute>} />
+        <Route path="/users/detail/:id" element={<AdminRoute><DetailUser /></AdminRoute>} />
 
-        <Route
-          path="/department-detail/:id"
-          element={
-            <ProtectedRoute>
-              <DepartmentDetail />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/roles" element={<AdminRoute><Roles /></AdminRoute>} />
+        <Route path="/roles/create" element={<AdminRoute><CreateRole /></AdminRoute>} />
+        <Route path="/roles/update/:id" element={<AdminRoute><UpdateRole /></AdminRoute>} />
+        <Route path="/roles/detail/:id" element={<AdminRoute><DetailRole /></AdminRoute>} />
 
-        <Route
-          path="/departments/create"
-          element={
-            <ProtectedRoute>
-              <CreateDepartment />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/departments" element={<AdminRoute><Departments /></AdminRoute>} />
+        <Route path="/departments/create" element={<AdminRoute><CreateDepartment /></AdminRoute>} />
+        <Route path="/departments/update/:id" element={<AdminRoute><UpdateDepartment /></AdminRoute>} />
+        <Route path="/departments/detail/:id" element={<AdminRoute><DetailDepartment /></AdminRoute>} />
+        
+        <Route path="/ticket-categories" element={<AdminRoute><TicketCategories /></AdminRoute>} />
+        <Route path="/ticket-categories/create" element={<AdminRoute><CreateTicketCategory /></AdminRoute>} />
+        <Route path="/ticket-categories/update/:id" element={<AdminRoute><UpdateTicketCategory /></AdminRoute>} />
+        
+        <Route path="/tickets" element={<AdminRoute><Tickets /></AdminRoute>} />
+        <Route path="/tickets/detail/:id" element={<AdminRoute><TicketDetail /></AdminRoute>} />
 
-        <Route
-          path="/departments/update/:id"
-          element={
-            <ProtectedRoute>
-              <UpdateDepartment />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/users"
-          element={
-            <ProtectedRoute>
-              <Users />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/users/create"
-          element={
-            <ProtectedRoute>
-              <CreateUser />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/users/detail/:id"
-          element={
-            <ProtectedRoute>
-              <UserDetail />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/users/update/:id"
-          element={
-            <ProtectedRoute>
-              <UpdateUser />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/documents"
-          element={
-            <ProtectedRoute>
-              <Documents />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/documents/create"
-          element={
-            <ProtectedRoute>
-              <CreateDocument />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/documents/migrate"
-          element={
-            <ProtectedRoute>
-              <MigrationDocuments />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/documents/detail/:id"
-          element={
-            <ProtectedRoute>
-              <DocumentDetail />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/documents/update/:id"
-          element={
-            <ProtectedRoute>
-              <UpdateDocument />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/documents/revise/:id"
-          element={
-            <ProtectedRoute>
-              <ReviseDocument />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/approvals"
-          element={
-            <ProtectedRoute>
-              <UnifiedApprovals />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/approvals/document/:id"
-          element={
-            <ProtectedRoute>
-              <DocumentApprovalDetail />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/approvals/print/:id"
-          element={
-            <ProtectedRoute>
-              <PrintApprovalDetail />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/approvals/deletion/:id"
-          element={
-            <ProtectedRoute>
-              <DeletionApprovalDetail />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/approvals/revision/:id"
-          element={
-            <ProtectedRoute>
-              <RevisionApprovalDetail />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/approvals/reference/:id"
-          element={
-            <ProtectedRoute>
-              <ReferenceApprovalDetail />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/documents/reference-approve"
-          element={
-            <ProtectedRoute>
-              <ReferenceApproval />
-            </ProtectedRoute>
-          }
-        />
-        {/* <Route
-          path="/documents/master-index"
-          element={
-            <ProtectedRoute>
-              <MasterIndex />
-            </ProtectedRoute>
-          }
-        /> */}
-
-        <Route
-          path="/shared-documents"
-          element={
-            <ProtectedRoute>
-              <Shared />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/shared-documents/departments/:id"
-          element={
-            <ProtectedRoute>
-              <DocumentShared />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/shared-documents/detail/:id"
-          element={
-            <ProtectedRoute>
-              <DocumentSharedDetail />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/shared-documents/master-index"
-          element={
-            <ProtectedRoute>
-              <MasterIndex />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/shared-documents/form-master-index"
-          element={
-            <ProtectedRoute>
-              <FormMasterIndex />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/shared-documents/external-master-index"
-          element={
-            <ProtectedRoute>
-              <ExternalMasterIndex />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/obsolete-documents"
-          element={
-            <ProtectedRoute>
-              <Obsolete />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/obsolete-documents/:id"
-          element={
-            <ProtectedRoute>
-              <ObsoleteDocumentDetail />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/print-history"
-          element={
-            <ProtectedRoute>
-              <PrintHistory />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/print-history/:id"
-          element={
-            <ProtectedRoute>
-              <PrintHistoryDetail />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/roles"
-          element={
-            <ProtectedRoute>
-              <Roles />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/roles/create"
-          element={
-            <ProtectedRoute>
-              <CreateRole />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/roles/detail/:id"
-          element={
-            <ProtectedRoute>
-              <RoleDetail />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/roles/update/:id"
-          element={
-            <ProtectedRoute>
-              <UpdateRole />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/references"
-          element={
-            <ProtectedRoute>
-              <References />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/references/create"
-          element={
-            <ProtectedRoute>
-              <CreateReference />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/references/update/:id"
-          element={
-            <ProtectedRoute>
-              <UpdateReference />
-            </ProtectedRoute>
-          }
-        />
+        {/* User Portal Routes */}
+        <Route path="/portal" element={<ProtectedRoute><PortalHome /></ProtectedRoute>} />
+        <Route path="/portal/tickets" element={<ProtectedRoute><PortalTickets /></ProtectedRoute>} />
+        <Route path="/portal/tickets/new" element={<ProtectedRoute><PortalCreateTicket /></ProtectedRoute>} />
+        <Route path="/portal/tickets/:id" element={<ProtectedRoute><PortalTicketDetail /></ProtectedRoute>} />
 
         {/* Not Found */}
         <Route path="*" element={<NotFound />} />

@@ -226,7 +226,7 @@ export default function MagicLink() {
           {/* Footer */}
           <div className="mt-8 pt-6 border-t border-gray-200">
             <p className="text-xs text-center text-gray-500">
-              QADMS - Quality Assurance Document Management System
+              IT Helpdesk System
               <br />© {new Date().getFullYear()} PT Toyo Ink Indonesia
             </p>
           </div>

@@ -17,8 +17,8 @@ import { useAppSelector } from "@/hooks/useAppSelector";
 import type { RootState } from "@/store";
 import { asyncSetAuthUser } from "@/store/authUser/action";
 import Lottie from "lottie-react";
-import DocHero from "@/assets/lottie/DocHero.json";
-import { THEME_PRESETS, applyThemeToDocument } from "@/lib/theme-utils";
+import ITDealAnim from "@/assets/lottie/Cute Bot Say Users Hello.json";
+
 import { useLanguage } from "@/context/LanguageContext";
 
 const containerVariants = {
@@ -35,7 +35,10 @@ const itemVariants = {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
-    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
+    transition: {
+      duration: 0.5,
+      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+    },
   },
 };
 
@@ -48,12 +51,7 @@ export default function LoginPage() {
   const error = useAppSelector((state: RootState) => state.authUser.error);
   const { t } = useLanguage();
 
-  useEffect(() => {
-    const defaultTheme = THEME_PRESETS.find((t) => t.name === "Forest Green");
-    if (defaultTheme) {
-      applyThemeToDocument(defaultTheme);
-    }
-  }, []);
+
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -70,43 +68,92 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="relative flex min-h-screen max-h-screen overflow-hidden items-center justify-center p-4"
-      style={{ background: "linear-gradient(135deg, var(--background) 0%, color-mix(in srgb, var(--muted) 50%, var(--background)) 50%, var(--background) 100%)" }}
-    >
-      {/* Animated background orbs */}
-      <motion.div
-        className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, color-mix(in srgb, var(--primary) 8%, transparent), transparent 70%)" }}
-        animate={{ x: [0, 30, 0], y: [0, -20, 0], scale: [1, 1.1, 1] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute bottom-[-10%] right-[-5%] w-[450px] h-[450px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, color-mix(in srgb, var(--secondary) 10%, transparent), transparent 70%)" }}
-        animate={{ x: [0, -25, 0], y: [0, 15, 0], scale: [1, 1.08, 1] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute top-[40%] right-[20%] w-[250px] h-[250px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, color-mix(in srgb, var(--accent) 6%, transparent), transparent 70%)" }}
-        animate={{ x: [0, 15, 0], y: [0, -10, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-      />
+    <div className="relative flex flex-col md:flex-row-reverse min-h-screen overflow-hidden items-center justify-center p-4 gap-8 md:gap-16 bg-slate-50 dark:bg-slate-950">
+      {/* Modern Hacker / IT Cyber Background */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-40 md:opacity-60">
+        {/* Cyber Grid */}
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `linear-gradient(to right, color-mix(in srgb, var(--primary) 10%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in srgb, var(--primary) 10%, transparent) 1px, transparent 1px)`,
+            backgroundSize: "40px 40px",
+            maskImage:
+              "radial-gradient(ellipse 80% 80% at 50% 50%, #000 20%, transparent 100%)",
+          }}
+        />
+
+        {/* Sweeping Cyber Scanner */}
+        <motion.div
+          animate={{ top: ["-10%", "110%"] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+          className="absolute left-0 right-0 h-[2px] bg-primary/50 shadow-[0_0_15px_rgba(37,99,235,0.8)]"
+        />
+
+        {/* Floating Data Nodes (Binary & Tech symbols) */}
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={`tech-node-${i}`}
+            className="absolute font-mono text-primary/40 text-xs md:text-sm font-bold"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              opacity: [0, 1, 0],
+              y: [0, -20],
+            }}
+            transition={{
+              duration: Math.random() * 2 + 2,
+              repeat: Infinity,
+              ease: "linear",
+              delay: Math.random() * 5,
+            }}
+          >
+            {Math.random() > 0.7
+              ? "< />"
+              : Math.random() > 0.4
+                ? "0101"
+                : "IT-SYS"}
+          </motion.div>
+        ))}
+
+        {/* Moving Data Packets on Grid */}
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={`packet-${i}`}
+            className="absolute bg-primary/60 shadow-[0_0_8px_rgba(37,99,235,0.6)]"
+            style={{
+              top: `${Math.floor(Math.random() * 20) * 40}px`,
+              height: "2px",
+              width: "40px",
+              left: "-40px",
+            }}
+            animate={{ left: ["-5%", "105%"] }}
+            transition={{
+              duration: Math.random() * 3 + 4,
+              repeat: Infinity,
+              ease: "linear",
+              delay: Math.random() * 4,
+            }}
+          />
+        ))}
+      </div>
 
       {/* Lottie hero */}
       <motion.div
         initial={{ opacity: 0, x: -40 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="w-full max-w-[280px] md:max-w-lg lg:max-w-xl hidden sm:block relative z-10"
       >
         <motion.div
           animate={{ y: [0, -8, 0] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         >
           <Lottie
-            animationData={DocHero}
-            style={{ width: 600, height: 600 }}
-            className="mr-10"
+            animationData={ITDealAnim}
+            style={{ width: "100%", height: "auto" }}
+            className="md:ml-10 mix-blend-multiply"
           />
         </motion.div>
       </motion.div>
@@ -119,7 +166,8 @@ export default function LoginPage() {
         className="w-full max-w-md relative z-10"
       >
         <title>Login</title>
-        <Card className="border-primary/20 shadow-2xl shadow-primary/10 glass-card"
+        <Card
+          className="border-primary/20 shadow-2xl shadow-primary/10 glass-card"
           style={{ borderRadius: "1.25rem" }}
         >
           <CardHeader className="space-y-1 pb-2">
@@ -127,15 +175,19 @@ export default function LoginPage() {
               className="flex items-center justify-center mb-3"
               initial={{ scale: 0, rotate: -180 }}
               animate={{ scale: 1, rotate: 0 }}
-              transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              transition={{
+                duration: 0.6,
+                delay: 0.4,
+                ease: [0.16, 1, 0.3, 1],
+              }}
             >
               <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center shadow-lg shadow-primary/30">
-                <span className="text-primary-foreground font-bold text-2xl">
-                  D
+                <span className="text-primary-foreground font-bold text-xl">
+                  IT
                 </span>
               </div>
             </motion.div>
-            <CardTitle className="text-2xl text-center">DMS QA</CardTitle>
+            <CardTitle className="text-2xl text-center">IT Helpdesk</CardTitle>
             <CardDescription className="text-center">
               {t("login.subtitle")}
             </CardDescription>
@@ -193,7 +245,12 @@ export default function LoginPage() {
                       type="button"
                       onClick={handleShowPassword}
                       className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-muted-foreground hover:text-foreground transition-colors"
-                      style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)' }}
+                      style={{
+                        position: "absolute",
+                        right: "12px",
+                        top: "50%",
+                        transform: "translateY(-50%)",
+                      }}
                     >
                       {isShowPassword ? (
                         <Eye className="h-4 w-4" />
@@ -227,7 +284,8 @@ export default function LoginPage() {
         <div
           className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-3/4 h-8 rounded-full pointer-events-none"
           style={{
-            background: "radial-gradient(ellipse, color-mix(in srgb, var(--primary) 15%, transparent), transparent 80%)",
+            background:
+              "radial-gradient(ellipse, color-mix(in srgb, var(--primary) 15%, transparent), transparent 80%)",
             filter: "blur(12px)",
           }}
         />
@@ -235,4 +293,3 @@ export default function LoginPage() {
     </div>
   );
 }
-

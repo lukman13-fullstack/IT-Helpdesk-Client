@@ -116,7 +116,7 @@ export default function Departments() {
               <div className="flex gap-2">
                 <Button
                   variant="outline"
-                  className="border-green-600 text-green-600 hover:bg-green-50 hover:text-green-700"
+                  className="border-primary/20 text-primary hover:bg-primary/10 hover:text-primary transition-all"
                   onClick={handleExportExcel}
                   disabled={departments.length === 0}
                 >
@@ -124,10 +124,10 @@ export default function Departments() {
                   Export Excel
                 </Button>
                 <Button
-                  className="bg-success hover:bg-success/80 dark:bg-primary dark:hover:bg-primary/80"
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-md shadow-primary/20 transition-all"
                   onClick={() => navigate("/departments/create")}
                 >
-                  <Plus className="mr-2" />
+                  <Plus className="mr-2 w-4 h-4" />
                   {t("departments.addDepartment")}
                 </Button>
               </div>
@@ -144,25 +144,25 @@ export default function Departments() {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="bg-primary text-primary-foreground rounded-tl-md">
+                    <TableHead className="bg-muted/50 font-semibold text-muted-foreground rounded-tl-lg">
                       {t("departments.columns.no")}
                     </TableHead>
-                    <TableHead className="bg-primary text-primary-foreground">
+                    <TableHead className="bg-muted/50 font-semibold text-muted-foreground">
                       {t("departments.columns.departmentName")}
                     </TableHead>
-                    <TableHead className="bg-primary text-primary-foreground">
+                    <TableHead className="bg-muted/50 font-semibold text-muted-foreground">
                       {t("departments.columns.departmentCode")}
                     </TableHead>
-                    <TableHead className="bg-primary text-primary-foreground">
+                    <TableHead className="bg-muted/50 font-semibold text-muted-foreground">
                       {t("departments.columns.description")}
                     </TableHead>
-                    <TableHead className="bg-primary text-primary-foreground">
+                    <TableHead className="bg-muted/50 font-semibold text-muted-foreground">
                       {t("departments.columns.usersCount")}
                     </TableHead>
-                    <TableHead className="bg-primary text-primary-foreground">
+                    <TableHead className="bg-muted/50 font-semibold text-muted-foreground">
                       {t("departments.columns.status")}
                     </TableHead>
-                    <TableHead className="bg-primary w-1/12 text-primary-foreground rounded-tr-md">
+                    <TableHead className="bg-muted/50 font-semibold text-muted-foreground rounded-tr-lg w-1/12 text-center">
                       {t("departments.columns.actions")}
                     </TableHead>
                   </TableRow>
@@ -182,11 +182,11 @@ export default function Departments() {
                       <TableCell>{department._count?.users ?? 0}</TableCell>
                       <TableCell>
                         {department.status === "active" ? (
-                          <Badge className="bg-green-500 text-white">
+                          <Badge variant="outline" className="bg-emerald-50 text-emerald-600 border-emerald-200">
                             {t("departments.status.active")}
                           </Badge>
                         ) : (
-                          <Badge className="bg-blue-500 text-white">
+                          <Badge variant="outline" className="bg-slate-50 text-slate-600 border-slate-200">
                             {t("departments.status.draft")}
                           </Badge>
                         )}
@@ -198,33 +198,34 @@ export default function Departments() {
                               navigate(`/department-detail/${department.id}`)
                             }
                             size="icon"
-                            variant="outline"
+                            variant="ghost"
+                            className="text-slate-500 hover:text-slate-700 hover:bg-slate-100 h-8 w-8"
                             title={t("departments.actions.view")}
                           >
-                            <Eye className="w-2 h-2" />
+                            <Eye className="w-4 h-4" />
                           </Button>
                           <Button
                             onClick={() =>
                               navigate(`/departments/update/${department.id}`)
                             }
                             size="icon"
-                            variant="outline"
-                            className="text-blue-600 hover:bg-blue-500 hover:text-blue-500"
+                            variant="ghost"
+                            className="text-blue-500 hover:text-blue-700 hover:bg-blue-50 h-8 w-8"
                             title={t("departments.actions.update")}
                           >
-                            <Edit className="w-2 h-2" />
+                            <Edit className="w-4 h-4" />
                           </Button>
                           <Button
                             size="icon"
-                            variant="outline"
-                            className="text-red-600 hover:bg-red-500 hover:text-red-500"
+                            variant="ghost"
+                            className="text-red-500 hover:text-red-700 hover:bg-red-50 h-8 w-8"
                             onClick={() => {
                               handleDeleteOpenChange(true);
                               handleDeleteIdChange(department.id);
                             }}
                             title={t("departments.actions.delete")}
                           >
-                            <Trash className="w-2 h-2" />
+                            <Trash className="w-4 h-4" />
                           </Button>
                         </div>
                       </TableCell>

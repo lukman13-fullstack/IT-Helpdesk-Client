@@ -49,64 +49,63 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --font-size: 16px;
-  --background: #f1faee;
-  --foreground: #1a2e1a;
-  --card: #fff;
-  --card-foreground: #1a2e1a;
-  --popover: #fff;
-  --popover-foreground: #1a2e1a;
-  --primary: #2d6a4f;
+  --radius: 0.5rem;
+  --font-size: 14px;
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  --primary: #2563eb;
   --primary-foreground: #ffffff;
-  --secondary: #52b788;
-  --secondary-foreground: #1a2e1a;
-  --muted: #d8f3dc;
-  --muted-foreground: #6b8f71;
-  --accent: #95d5b2;
-  --accent-foreground: #1a2e1a;
-  --info: #6ec1e4;
-  --info-foreground: #fff;
-  --success: #2eb513;
-  --success-foreground: #fff;
-  --warning: #ffb84d;
-  --warning-foreground: #1a2e1a;
+  --secondary: #3b82f6;
+  --secondary-foreground: #ffffff;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --accent: #dbeafe;
+  --accent-foreground: #1e3a8a;
+  --info: #0ea5e9;
+  --info-foreground: #ffffff;
+  --success: #10b981;
+  --success-foreground: #ffffff;
+  --warning: #f59e0b;
+  --warning-foreground: #ffffff;
   --destructive: #ef4444;
-  --destructive-foreground: #fff;
-  --border: #2d6a4f26;
+  --destructive-foreground: #ffffff;
+  --border: #e2e8f0;
   --input: transparent;
-  --input-background: #fff;
-  --switch-background: #bbf7d0;
-  --font-weight-medium: 600;
+  --input-background: #ffffff;
+  --switch-background: #cbd5e1;
+  --font-weight-medium: 500;
   --font-weight-normal: 400;
-  --ring: #2d6a4f;
-  --chart-1: #2d6a4f;
-  --chart-2: #52b788;
-  --chart-3: #95d5b2;
-  --chart-4: #6ec1e4;
-  --chart-5: #c792ea;
-  --purple: #c792ea;
-  --purple-foreground: #fff;
-  --pink: #ffb3d9;
-  --pink-foreground: #1a2e1a;
-  --orange: #ffaf6f;
-  --orange-foreground: #fff;
-  --blue: #89cff0;
-  --blue-foreground: #fff;
-  --green: #2d6a4f;
-  --green-foreground: #fff;
-  --radius: 1.5rem;
-  --sidebar: #fff;
-  --sidebar-foreground: #1a2e1a;
-  --sidebar-primary: #2d6a4f;
+  --ring: #3b82f6;
+  --chart-1: #3b82f6; /* blue */
+  --chart-2: #10b981; /* emerald */
+  --chart-3: #f59e0b; /* amber */
+  --chart-4: #8b5cf6; /* purple */
+  --chart-5: #ec4899; /* pink */
+  --purple: #8b5cf6;
+  --purple-foreground: #ffffff;
+  --pink: #ec4899;
+  --pink-foreground: #ffffff;
+  --orange: #f97316;
+  --orange-foreground: #ffffff;
+  --blue: #3b82f6;
+  --blue-foreground: #ffffff;
+  --green: #10b981;
+  --green-foreground: #ffffff;
+  --sidebar: #0f172a;
+  --sidebar-foreground: #f8fafc;
+  --sidebar-primary: #3b82f6;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #d8f3dc;
-  --sidebar-accent-foreground: #1a2e1a;
-  --sidebar-border: #2d6a4f26;
-  --sidebar-ring: #2d6a4f;
-  --text-2xl: 2.25rem;
-  --text-xl: 1.75rem;
-  --text-lg: 1.25rem;
+  --sidebar-accent: #1e293b;
+  --sidebar-accent-foreground: #f8fafc;
+  --sidebar-border: #1e293b;
+  --sidebar-ring: #3b82f6;
+  --text-2xl: 1.875rem;
+  --text-xl: 1.5rem;
+  --text-lg: 1.125rem;
   --text-base: 1rem;
   --text-sm: 0.875rem;
 }
@@ -117,369 +116,70 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
   }
   
-  /* Modern font class for premium sections */
   .font-modern {
     font-family: 'Outfit', sans-serif;
   }
 }
 
-@keyframes shake {
-  0% {
-    transform: translateX(0);
-  }
-  20% {
-    transform: translateX(-5px);
-  }
-  40% {
-    transform: translateX(5px);
-  }
-  60% {
-    transform: translateX(-5px);
-  }
-  80% {
-    transform: translateX(5px);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-
-.shake-animation {
-  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  perspective: 1000px;
-}
-
 .custom-scrollbar::-webkit-scrollbar {
   width: 10px;
 }
-
 .custom-scrollbar::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
-
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background: var(--primary);
   border-radius: 6px;
 }
-
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: var(--primary);
 }
 
-/* ============================================================================
-   Shared Documents Page Animations
-   ============================================================================ */
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--primary) 20%, transparent);
+  border-radius: 99px;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--primary) 40%, transparent);
+}
+html {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--primary) 20%, transparent) transparent;
 }
 
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.92);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+/* Spinner */
+@keyframes modernSpin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.modern-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid color-mix(in srgb, var(--primary) 15%, transparent);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: modernSpin 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(-16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-@keyframes floatY {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-4px);
-  }
-}
-
-@keyframes pulseGlow {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(45, 106, 79, 0.15);
-  }
-  50% {
-    box-shadow: 0 0 0 8px rgba(45, 106, 79, 0);
-  }
-}
-
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.animate-fade-in-up {
-  animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  opacity: 0;
-}
-
-.animate-scale-in {
-  animation: scaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  opacity: 0;
-}
-
-.animate-slide-in-right {
-  animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  opacity: 0;
-}
-
-.animate-float {
-  animation: floatY 3s ease-in-out infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulseGlow 2s ease-in-out infinite;
-}
-
-.gradient-animated {
-  background: linear-gradient(
-    135deg,
-    var(--primary) 0%,
-    var(--secondary) 50%,
-    var(--accent) 100%
-  );
-  background-size: 200% 200%;
-  animation: gradientShift 4s ease infinite;
-}
-
-.card-shine {
-  position: relative;
-  overflow: hidden;
-}
-
-.card-shine::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.08),
-    transparent
-  );
-  transition: left 0.5s ease;
-}
-
-.card-shine:hover::after {
-  left: 100%;
-}
-
-/* ============================================================================
-   Global Page Entrance Animation (applied by Layout)
-   ============================================================================ */
-
-@keyframes pageEntrance {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.page-entrance {
-  animation: pageEntrance 0.35s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
-  will-change: opacity, transform;
-}
-
-/* ============================================================================
-   Global Card & Interactive Element Enhancements
-   ============================================================================ */
-
-/* Smooth lift on hover for ALL Card components */
-[data-slot="card"] {
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.3s ease;
-}
-
-[data-slot="card"]:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px -8px rgba(0, 0, 0, 0.1),
-              0 4px 12px -4px rgba(0, 0, 0, 0.06);
-}
-
-/* Smooth transition for table rows globally */
-table tbody tr {
-  transition: background-color 0.25s ease, transform 0.2s ease;
-}
-
-table tbody tr:hover {
-  background-color: color-mix(in srgb, var(--primary) 3%, transparent);
-}
-
-/* Button press effect */
-button, [role="button"] {
-  transition: transform 0.15s ease, box-shadow 0.2s ease, 
-              background-color 0.2s ease, color 0.2s ease,
-              border-color 0.2s ease, opacity 0.2s ease;
-}
-
-button:active, [role="button"]:active {
-  transform: scale(0.97);
-}
-
-/* ============================================================================
-   Scroll-Reveal Parallax (IntersectionObserver-based)
-   Applied automatically to elements with .scroll-reveal class
-   ============================================================================ */
-
-.scroll-reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.scroll-reveal.revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.scroll-reveal-left {
-  opacity: 0;
-  transform: translateX(-20px);
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.scroll-reveal-left.revealed {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.scroll-reveal-scale {
-  opacity: 0;
-  transform: scale(0.95);
-  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.scroll-reveal-scale.revealed {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* Stagger delays for child element animations */
-.stagger-children > *:nth-child(1) { transition-delay: 0ms; }
-.stagger-children > *:nth-child(2) { transition-delay: 60ms; }
-.stagger-children > *:nth-child(3) { transition-delay: 120ms; }
-.stagger-children > *:nth-child(4) { transition-delay: 180ms; }
-.stagger-children > *:nth-child(5) { transition-delay: 240ms; }
-.stagger-children > *:nth-child(6) { transition-delay: 300ms; }
-.stagger-children > *:nth-child(7) { transition-delay: 360ms; }
-.stagger-children > *:nth-child(8) { transition-delay: 420ms; }
-.stagger-children > *:nth-child(9) { transition-delay: 480ms; }
-.stagger-children > *:nth-child(10) { transition-delay: 540ms; }
-
-/* ============================================================================
-   Badge & Focus ring polish
-   ============================================================================ */
-
-/* Smooth badge transitions */
-[data-slot="badge"] {
-  transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
-}
-
-[data-slot="badge"]:hover {
-  transform: scale(1.03);
-}
-
-/* Input focus glow */
-input:focus, textarea:focus, select:focus {
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 12%, transparent);
-  transition: box-shadow 0.25s ease, border-color 0.25s ease;
-}
-
-/* ============================================================================
-   🌊 SHIMMER & GRADIENT ANIMATED
-   ============================================================================ */
-
-@keyframes shimmer {
-  0%   { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
-
-.gradient-animated {
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    color-mix(in srgb, var(--primary) 25%, transparent) 25%,
-    color-mix(in srgb, var(--primary) 50%, transparent) 50%,
-    color-mix(in srgb, var(--primary) 25%, transparent) 75%,
-    transparent 100%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 3s ease-in-out infinite;
-}
-
-/* ============================================================================
-   🔥 PREMIUM MICRO ANIMATIONS
-   ============================================================================ */
-
-/* Smooth count-up reveal for numbers */
-@keyframes countReveal {
-  from { opacity: 0; transform: translateY(8px) scale(0.9); filter: blur(2px); }
-  to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-}
-.animate-count-reveal {
-  animation: countReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Ripple effect */
-@keyframes ripple {
-  0%   { transform: scale(0); opacity: 0.5; }
-  100% { transform: scale(4); opacity: 0; }
-}
-
-/* Skeleton loading pulse */
+/* Skeleton Loading */
 @keyframes skeletonPulse {
   0%, 100% { opacity: 0.4; }
   50%      { opacity: 0.8; }
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 .skeleton {
   background: linear-gradient(
@@ -493,328 +193,12 @@ input:focus, textarea:focus, select:focus {
   border-radius: 8px;
 }
 
-/* Glowing border spin */
-@keyframes gradientBorderSpin {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* Page Entrance */
+@keyframes pageEntrance {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-
-/* Smooth progress bar fill */
-@keyframes progressFill {
-  from { width: 0%; }
-}
-.animate-progress-fill {
-  animation: progressFill 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Soft bounce entrance */
-@keyframes softBounce {
-  0%   { opacity: 0; transform: translateY(20px) scale(0.96); }
-  60%  { opacity: 1; transform: translateY(-3px) scale(1.01); }
-  100% { opacity: 1; transform: translateY(0) scale(1); }
-}
-.animate-soft-bounce {
-  animation: softBounce 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-  opacity: 0;
-}
-
-/* Icon spin on hover (for settings, refresh icons) */
-.hover-spin:hover svg {
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  transform: rotate(90deg);
-}
-
-/* ============================================================================
-   🪟 GLASSMORPHISM UTILITIES
-   ============================================================================ */
-
-.glass {
-  background: color-mix(in srgb, var(--background) 70%, transparent);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
-}
-
-.glass-card {
-  background: color-mix(in srgb, var(--card) 80%, transparent);
-  backdrop-filter: blur(12px) saturate(150%);
-  -webkit-backdrop-filter: blur(12px) saturate(150%);
-  border: 1px solid color-mix(in srgb, var(--border) 40%, transparent);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.04);
-}
-
-/* ============================================================================
-   🎨 PREMIUM GRADIENT BORDER CARD
-   ============================================================================ */
-
-.gradient-border-card {
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-}
-
-.gradient-border-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  padding: 1.5px;
-  border-radius: inherit;
-  background: linear-gradient(
-    135deg,
-    color-mix(in srgb, var(--primary) 30%, transparent),
-    color-mix(in srgb, var(--secondary) 20%, transparent),
-    color-mix(in srgb, var(--accent) 30%, transparent)
-  );
-  background-size: 300% 300%;
-  animation: gradientBorderSpin 4s ease infinite;
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.gradient-border-card:hover::before {
-  opacity: 1;
-}
-
-/* ============================================================================
-   💫 ENHANCED TABLE ROWS
-   ============================================================================ */
-
-table tbody tr {
-  transition: background-color 0.25s ease, transform 0.2s ease, box-shadow 0.3s ease;
-}
-
-table tbody tr:hover {
-  background-color: color-mix(in srgb, var(--primary) 3%, transparent);
-  box-shadow: inset 3px 0 0 var(--primary);
-}
-
-/* ============================================================================
-   🔘 ENHANCED BUTTONS
-   ============================================================================ */
-
-/* Ripple container for buttons */
-button, [role="button"] {
-  position: relative;
-  overflow: hidden;
-}
-
-button::after, [role="button"]::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-
-button:hover::after, [role="button"]:hover::after {
-  opacity: 0.5;
-}
-
-/* ============================================================================
-   📑 SIDEBAR ENHANCEMENTS
-   ============================================================================ */
-
-/* Active indicator pill */
-[data-sidebar="menu-button"][data-active="true"] {
-  position: relative;
-}
-
-[data-sidebar="menu-button"][data-active="true"]::before {
-  content: '';
-  position: absolute;
-  left: -8px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 4px;
-  height: 60%;
-  background: var(--primary);
-  border-radius: 0 4px 4px 0;
-  animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Sidebar smooth scroll */
-[data-sidebar="content"] {
-  scrollbar-width: thin;
-  scrollbar-color: color-mix(in srgb, var(--sidebar-primary) 20%, transparent) transparent;
-}
-
-[data-sidebar="content"]::-webkit-scrollbar {
-  width: 4px;
-}
-
-[data-sidebar="content"]::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-[data-sidebar="content"]::-webkit-scrollbar-thumb {
-  background: color-mix(in srgb, var(--sidebar-primary) 25%, transparent);
-  border-radius: 4px;
-}
-
-/* ============================================================================
-   🎭 DIALOG / MODAL BACKDROP ENHANCEMENT
-   ============================================================================ */
-
-[data-slot="dialog-overlay"] {
-  backdrop-filter: blur(4px) saturate(120%);
-  -webkit-backdrop-filter: blur(4px) saturate(120%);
-  background: rgba(0, 0, 0, 0.35) !important;
-}
-
-[data-slot="dialog-content"] {
-  animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* ============================================================================
-   📊 STATUS DOT ANIMATIONS
-   ============================================================================ */
-
-@keyframes statusPulse {
-  0%, 100% { box-shadow: 0 0 0 0 currentColor; opacity: 1; }
-  50%      { box-shadow: 0 0 0 4px currentColor; opacity: 0.5; }
-}
-
-.status-dot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  animation: statusPulse 2s ease-in-out infinite;
-}
-
-.status-dot--success { color: var(--success); background: var(--success); }
-.status-dot--warning { color: var(--warning); background: var(--warning); }
-.status-dot--error   { color: var(--destructive); background: var(--destructive); }
-.status-dot--info    { color: var(--info); background: var(--info); }
-
-/* ============================================================================
-   🚀 LOADING SPINNER ENHANCEMENT
-   ============================================================================ */
-
-@keyframes modernSpin {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.modern-spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid color-mix(in srgb, var(--primary) 15%, transparent);
-  border-top-color: var(--primary);
-  border-radius: 50%;
-  animation: modernSpin 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-}
-
-/* ============================================================================
-   ✍️ TOOLTIP ENHANCEMENT
-   ============================================================================ */
-
-[data-slot="tooltip-content"] {
-  animation: scaleIn 0.15s cubic-bezier(0.16, 1, 0.3, 1);
-  backdrop-filter: blur(8px);
-}
-
-/* ============================================================================
-   📱 GLOBAL SCROLLBAR
-   ============================================================================ */
-
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: color-mix(in srgb, var(--primary) 20%, transparent);
-  border-radius: 99px;
-  border: 2px solid transparent;
-  background-clip: padding-box;
-  transition: background 0.3s ease;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: color-mix(in srgb, var(--primary) 40%, transparent);
-  background-clip: padding-box;
-}
-
-/* Firefox */
-html {
-  scrollbar-width: thin;
-  scrollbar-color: color-mix(in srgb, var(--primary) 20%, transparent) transparent;
-}
-
-/* ============================================================================
-   🎪 NOTIFICATION BELL / POPOVER ANIMATIONS
-   ============================================================================ */
-
-@keyframes bellRing {
-  0%, 100% { transform: rotate(0deg); }
-  10%      { transform: rotate(14deg); }
-  20%      { transform: rotate(-13deg); }
-  30%      { transform: rotate(10deg); }
-  40%      { transform: rotate(-8deg); }
-  50%      { transform: rotate(4deg); }
-  60%      { transform: rotate(0deg); }
-}
-
-.animate-bell-ring {
-  animation: bellRing 1s ease-in-out;
-}
-
-/* ============================================================================
-   Reduce Motion: Respect user preference
-   ============================================================================ */
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-  .page-entrance {
-    animation: none;
-    opacity: 1;
-  }
-  .scroll-reveal, .scroll-reveal-left, .scroll-reveal-scale {
-    opacity: 1;
-    transform: none;
-  }
-  .skeleton {
-    animation: none;
-  }
-  .modern-spinner {
-    animation: modernSpin 1.5s linear infinite;
-  }
-}
-
-/* ============================================================================
-   📝 REACT QUILL CUSTOMIZATION (Work Instructions)
-   ============================================================================ */
-.wi-quill-editor .ql-editor {
-  padding: 0 !important;
-  min-height: inherit;
-}
-.wi-quill-editor .ql-editor p {
-  margin-bottom: 0.5rem;
-}
-.wi-quill-editor .ql-editor p:last-child {
-  margin-bottom: 0;
-}
-.wi-quill-editor-section .ql-editor {
-  padding: 4px 8px !important;
-  font-weight: bold;
-}
-.wi-quill-editor-section .ql-editor p {
-  margin-bottom: 0;
+.page-entrance {
+  animation: pageEntrance 0.35s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+  will-change: opacity, transform;
 }

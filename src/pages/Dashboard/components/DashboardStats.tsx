@@ -130,7 +130,7 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ status }) => {
 
   const stats = [
     {
-      label: t("dashboard.totalDocuments"),
+      label: "Total Tickets",
       value: Object.values(status).reduce((a, b) => a + b, 0),
       icon: <FileText className="w-5 h-5 text-white" />,
       color: "bg-blue-500",
@@ -139,30 +139,30 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ status }) => {
       delay: 0.1,
     },
     {
-      label: t("dashboard.approved"),
-      value: status["Approved"] || 0,
-      icon: <CheckCircle2 className="w-5 h-5 text-white" />,
-      color: "bg-emerald-500",
-      iconBg: "bg-emerald-500",
-      gradient: "linear-gradient(135deg, #10b981, #34d399)",
-      delay: 0.2,
-    },
-    {
-      label: t("dashboard.pendingApproval"),
-      value: status["Pending Approval"] || 0,
+      label: "Open Tickets",
+      value: status["OPEN"] || 0,
       icon: <Clock className="w-5 h-5 text-white" />,
       color: "bg-amber-500",
       iconBg: "bg-amber-500",
       gradient: "linear-gradient(135deg, #f59e0b, #fbbf24)",
+      delay: 0.2,
+    },
+    {
+      label: "In Progress",
+      value: status["IN_PROGRESS"] || 0,
+      icon: <CheckCircle2 className="w-5 h-5 text-white" />,
+      color: "bg-emerald-500",
+      iconBg: "bg-emerald-500",
+      gradient: "linear-gradient(135deg, #10b981, #34d399)",
       delay: 0.3,
     },
     {
-      label: t("dashboard.rejected"),
-      value: status["Rejected"] || 0,
+      label: "Closed Tickets",
+      value: status["CLOSED"] || 0,
       icon: <AlertCircle className="w-5 h-5 text-white" />,
       color: "bg-rose-500",
       iconBg: "bg-rose-500",
-      gradient: "linear-gradient(135deg, #f43f5e, #fb7185)",
+      gradient: "linear-gradient(135deg, #8b5cf6, #c084fc)",
       delay: 0.4,
     },
   ];

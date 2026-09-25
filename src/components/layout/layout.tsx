@@ -16,11 +16,10 @@ import {
 } from "@/components/ui/breadcrumb";
 import type { BreadcrumbItemType } from "@/types/breadcrumb";
 import PopoverProfile from "./profile";
-import NotificationPopover from "@/components/common/notification-popover";
-import ThemeColorPicker from "@/components/common/theme-color-picker";
 import LanguageSwitcher from "@/components/common/LanguageSwitcher";
 import { useLanguage } from "@/context/LanguageContext";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import NotificationDropdown from "@/components/common/NotificationDropdown";
 
 interface LayoutProps {
   children: ReactNode;
@@ -38,7 +37,7 @@ const Layout: React.FC<LayoutProps> = ({ children, title, items = [] }) => {
 
   React.useEffect(() => {
     if (title) {
-      document.title = `DMS | ${title}`;
+      document.title = `IT Helpdesk | ${title}`;
     }
   }, [title]);
 
@@ -94,8 +93,7 @@ const Layout: React.FC<LayoutProps> = ({ children, title, items = [] }) => {
           </div>
           <div className="flex items-center gap-2 justify-end">
             <LanguageSwitcher />
-            <NotificationPopover />
-            <ThemeColorPicker />
+            <NotificationDropdown />
             <PopoverProfile />
           </div>
         </header>
@@ -148,7 +146,7 @@ const Layout: React.FC<LayoutProps> = ({ children, title, items = [] }) => {
         >
           <p>{t("layout.copyright", { year: new Date().getFullYear() })}</p>
           <p>{t("layout.allRightsReserved")}</p>
-          <p className="mt-1 font-semibold text-[10px] opacity-70">Project by Siti Nurjanah (QA) | Developer by Lukman Pirmansah (IT)</p>
+          <p className="mt-1 font-semibold text-[10px] opacity-70">Project by Lukman Pirmansah (IT)</p>
         </footer>
       </SidebarInset>
     </SidebarProvider>

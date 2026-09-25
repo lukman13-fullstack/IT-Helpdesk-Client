@@ -36,7 +36,6 @@ import {
 import { useState, useEffect } from "react";
 import { useAppSelector } from "@/hooks/useAppSelector";
 import { useLanguage } from "@/context/LanguageContext";
-import logo from "@/assets/icons/logo.png";
 
 interface SidebarItem {
   title: string;
@@ -57,94 +56,27 @@ export function AppSidebar() {
 
   const mainItems: SidebarItem[] = [
     {
-      title: t("sidebar.dashboard"),
+      title: "Dashboard",
       url: "/dashboard",
       icon: Home,
+    },
+    {
+      title: "Tickets",
+      url: "/tickets",
+      icon: CheckCircle2,
     },
   ];
 
   const collapsibleGroups: CollapsibleGroup[] = [
     {
-      title: t("sidebar.documents"),
-      permission: "ALL",
-      icon: Files,
+      title: "Master Data",
+      icon: Settings,
+      permission: "MANAGE_USERS", // or create specific permissions
       subItems: [
-        {
-          title: t("sidebar.masterDocuments"),
-          url: "/documents",
-          icon: Book,
-        },
-        {
-          title: t("sidebar.sharedDocuments"),
-          url: "/shared-documents",
-          icon: Share2,
-        },
-        {
-          title: t("sidebar.obsoleteDocuments"),
-          url: "/obsolete-documents",
-          permission: "VIEW_OBSOLETE_DOCUMENTS",
-          icon: Trash,
-        },
-        {
-          title: t("sidebar.approvals"),
-          url: "/approvals",
-          permission: "APPROVE_DOCUMENT",
-          icon: CheckCircle2,
-        },
-        {
-          title: t("sidebar.printHistory"),
-          url: "/print-history",
-          icon: Printer,
-        },
-        {
-          title: t("sidebar.migrationsDoc"),
-          url: "/documents/migrate",
-          permission: "MIGRATE_DOCUMENT",
-          icon: FolderSync,
-        },
-      ],
-    },
-    {
-      title: t("sidebar.recordsDocuments"),
-      permission: "VIEW_RECORDS",
-      icon: FolderSync,
-      subItems: [
-        {
-          title: t("sidebar.records"),
-          url: "/records",
-          permission: "VIEW_RECORDS",
-          icon: Book,
-        },
-      ],
-    },
-    {
-      title: t("sidebar.master"),
-      icon: Users2,
-      subItems: [
-        {
-          title: t("sidebar.departments"),
-          url: "/departments",
-          permission: "MANAGE_DEPARTMENTS",
-          icon: Settings,
-        },
-        {
-          title: t("sidebar.users"),
-          url: "/users",
-          permission: "MANAGE_USERS",
-          icon: User,
-        },
-        {
-          title: t("sidebar.roles"),
-          url: "/roles",
-          permission: "MANAGE_ROLES",
-          icon: Shield,
-        },
-        {
-          title: t("sidebar.references"),
-          url: "/references",
-          permission: "MANAGE_REFERENCES",
-          icon: BookMarked,
-        },
+        { title: "Users", url: "/users", icon: User, permission: "MANAGE_USERS" },
+        { title: "Roles", url: "/roles", icon: Shield, permission: "MANAGE_ROLES" },
+        { title: "Departments", url: "/departments", icon: Users2, permission: "MANAGE_DEPARTMENTS" },
+        { title: "Ticket Categories", url: "/ticket-categories", icon: FolderSync },
       ],
     },
   ];
@@ -208,14 +140,14 @@ export function AppSidebar() {
 
   return (
     <Sidebar collapsible="icon">
-      <SidebarHeader>
-        <div className="flex items-center gap-2 px-2 py-2">
-          <div className="flex w-20 items-center justify-center rounded-md">
-            <img src={logo} alt="Logo" className="w-20" />
+      <SidebarHeader className="border-b border-sidebar-border/50 pb-2">
+        <div className="flex items-center gap-3 px-2 py-3 bg-gradient-to-r from-primary/10 to-transparent rounded-lg m-1 border border-primary/10">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center">
+            <img src="/pwa-192x192.png" alt="Logo" className="h-9 w-9 object-contain" />
           </div>
           <div className="flex flex-col gap-0.5 leading-none">
-            <span className="font-semibold">DMS QA</span>
-            <span className="text-xs text-muted-foreground">v1.0.0</span>
+            <span className="font-bold text-sm tracking-tight text-sidebar-foreground">IT Helpdesk</span>
+            <span className="text-[10px] font-medium text-primary">Administration</span>
           </div>
         </div>
       </SidebarHeader>

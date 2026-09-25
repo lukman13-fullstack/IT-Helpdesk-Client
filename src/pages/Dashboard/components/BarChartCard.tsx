@@ -127,15 +127,8 @@ const BarChartCard: React.FC<BarChartCardProps> = ({
       padding: { bottom: 15 },
     },
     fill: {
-      type: "gradient",
-      gradient: {
-        shade: "light",
-        type: "vertical",
-        shadeIntensity: 0.4,
-        opacityFrom: 1,
-        opacityTo: 0.75,
-        stops: [0, 95],
-      },
+      type: "solid",
+      opacity: 0.85,
     },
   };
 

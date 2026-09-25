@@ -57,7 +57,7 @@ const id = {
 
   // ── Login ────────────────────────────────────────────────
   login: {
-    title: "DMS QA",
+    title: "IT Helpdesk",
     subtitle: "Masukkan kredensial Anda untuk masuk",
     username: "Nama Pengguna",
     usernamePlaceholder: "Masukkan nama pengguna Anda",

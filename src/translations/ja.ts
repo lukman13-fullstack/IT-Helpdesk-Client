@@ -53,7 +53,7 @@ const ja = {
 
   // ── Login ────────────────────────────────────────────────
   login: {
-    title: "DMS QA",
+    title: "IT Helpdesk",
     subtitle: "ログイン情報を入力してください",
     username: "ユーザー名",
     usernamePlaceholder: "ユーザー名を入力",
